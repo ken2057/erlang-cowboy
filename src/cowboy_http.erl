@@ -385,7 +385,7 @@ after_parse({data, StreamID, IsFin, Data, State0=#state{opts=Opts, buffer=Buffer
 	catch ?CATCH(Class, Exception, Stacktrace) ->
 		cowboy:log(cowboy_stream:make_error_log(data,
 			[StreamID, IsFin, Data, StreamState0],
-			Class, Exception, ?STACK(_Stacktrace)), Opts),
+			Class, Exception, ?STACK(Stacktrace)), Opts),
 		%% @todo Should call parse after this.
 		stream_terminate(State0, StreamID, {internal_error, {Class, Exception},
 			'Unhandled exception in cowboy_stream:data/4.'})
